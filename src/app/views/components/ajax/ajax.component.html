@@ -1,0 +1,72 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-sm-12">
+      <h4>Multiple Http Calls</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <strong>Parallel calls using forkJoin</strong>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-6">
+              <p>Response 1</p>
+              <kendo-grid [data]="gridData" [pageSize]="state.take" [skip]="state.skip" [sort]="state.sort" [pageable]="true"
+                [filter]="state.filter" [sortable]="true" [pageable]="true" [filterable]="true" (dataStateChange)="dataStateChange($event)"
+                [navigable]="true">
+                <kendo-grid-column field="label" title="Label" width="140" [filterable]="true"></kendo-grid-column>
+                <kendo-grid-column field="low" title="Low" filter="numeric" width="180"></kendo-grid-column>
+                <kendo-grid-column field="high" title="Hight" filter="numeric" width="160"></kendo-grid-column>
+                <kendo-grid-column field="open" title="Open" filter="numeric" width="120"></kendo-grid-column>
+                <kendo-grid-column field="close" title="Close" filter="numeric" width="100"></kendo-grid-column>
+              </kendo-grid>
+            </div>
+            <div class="col-sm-6">
+              <p>Response 2</p>
+              <kendo-grid [data]="gridData2" [pageSize]="state2.take" [skip]="state2.skip" [sort]="state2.sort"
+                [pageable]="true" [filter]="state2.filter" [sortable]="true" [pageable]="true" [filterable]="true"
+                (dataStateChange)="dataStateChange2($event)" [navigable]="true">
+                <kendo-grid-column field="venueName" title="Venue Name" width="140" [filterable]="true"></kendo-grid-column>
+                <kendo-grid-column field="venue" title="Venue" width="140"></kendo-grid-column>
+                <kendo-grid-column field="volume" title="Volume" filter="numeric" width="160"></kendo-grid-column>
+                <kendo-grid-column field="effectiveQuoted" title="Quoted" filter="numeric" width="120"></kendo-grid-column>
+                <kendo-grid-column field="effectiveSpread" title="Spread" filter="numeric" width="100"></kendo-grid-column>
+              </kendo-grid>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <strong>Sequential calls using switchMap</strong>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-12">
+                <ul class="product-list">
+                    <li>
+                      <div class="row">
+                        <div class="col-sm-6"><span class="label bold">First Name:</span> &nbsp;&nbsp; <span class="fieldValue">{{firstname}}</span></div>
+                        <div class="col-sm-6"><span class="label bold">Last Name:</span> &nbsp;&nbsp; <span class="fieldValue">{{lastname}}</span></div>
+                        <div class="col-sm-6"><span class="label bold">Email:</span> &nbsp;&nbsp; <span class="fieldValue">{{email}}</span></div>
+                        <div class="col-sm-6"><span class="label bold">phone:</span> &nbsp;&nbsp; <span class="fieldValue">{{phone}}</span></div>
+                        <div class="col-sm-6"><span class="label bold">Address:</span> &nbsp;&nbsp; <span class="fieldValue">{{address}}</span></div>
+                        <div class="col-sm-6"><span class="label bold">DOB:</span> &nbsp;&nbsp; <span class="fieldValue">{{dob | date:"MM/dd/yy"}}</span></div>
+                      </div>
+                    </li>
+                  </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

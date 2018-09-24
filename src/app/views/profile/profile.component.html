@@ -1,0 +1,219 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                <strong>Profile</strong>
+            </div>
+            <div class="card-body">
+                <div *ngIf="profileNoRecord">
+                    <form [formGroup]="createProfileForm" (ngSubmit)="saveProfile()">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="firstname">First Name : </label>
+                                    <input type="text" class="form-control" id="firstname" formControlName="firstname" placeholder="">
+                                    <div class="invalid-field" *ngIf="!createProfileForm.controls['firstname'].valid && createProfileForm.controls['firstname'].touched">
+                                        Please provide a valid username.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="lastname">Last Name</label>
+                                    <input type="text" class="form-control" id="lastname" formControlName="lastname" placeholder="">
+                                    <div class="invalid-field" *ngIf="!createProfileForm.controls['lastname'].valid && createProfileForm.controls['lastname'].touched">
+                                        Please provide a valid lastname.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="phone">Phone</label>
+                                    <input type="text" class="form-control" id="phone" formControlName="phone" placeholder="">
+                                    <div class="invalid-field" *ngIf="!createProfileForm.controls['phone'].valid && createProfileForm.controls['phone'].touched">
+                                        Please provide a valid phone.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="dob">DOB</label>
+                                    <input type="text" class="form-control" id="dob" formControlName="dob" placeholder="">
+                                    <div class="invalid-field" *ngIf="!createProfileForm.controls['dob'].valid && createProfileForm.controls['dob'].touched">
+                                        Please provide a valid dob.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="address">Address</label>
+                                    <input type="text" class="form-control" id="address" formControlName="address" placeholder="">
+                                    <div class="invalid-field" *ngIf="!createProfileForm.controls['address'].valid && createProfileForm.controls['address'].touched">
+                                        Please provide a valid address.
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label for="address">Upload Photo</label>
+                                    <input type="file" style="padding-bottom: 35px !important;" name="photo" #inputFile (change)="onFileSeleected($event)" class="form-control"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Close</button>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                <button type="submit" [disabled]="!createProfileForm.valid" class="btn btn-primary">Save</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div *ngIf="profileContainer">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="address">Photo</label>
+                                <div class="form-control read-only-text">
+                                    <img class="card-img-top img-responsive" style="margin: 10px auto;" src='https://blooming-oasis-90246.herokuapp.com/{{avatar}}'>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="username">Name : </label>
+                                <div class="form-control read-only-text">{{firstname}}</div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="lastname">Last Name</label>
+                                <div class="form-control read-only-text">{{lastname}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="phoneno">Phone</label>
+                                <div class="form-control read-only-text">{{phone}}</div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="dob">DOB</label>
+                                <div class="form-control read-only-text">{{dob}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="address">Address</label>
+                                <div class="form-control read-only-text">{{address}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button type="button" class="btn btn-primary" data-toggle="modal" (click)="primaryModal.show()">
+                                Edit Profile
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div bsModal #primaryModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-primary" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Update {{firstname}} {{lastname}}'s Profile</h4>
+                <button type="button" class="close" (click)="primaryModal.hide()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="updateProfileForm" (ngSubmit)="updateProfile()">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="firstname">First Name : </label>
+                                <input type="text" class="form-control" id="firstname" formControlName="firstname" placeholder="">
+                                <div class="invalid-field" *ngIf="!updateProfileForm.controls['firstname'].valid && updateProfileForm.controls['firstname'].touched">
+                                    Please provide a valid username.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="lastname">Last Name</label>
+                                <input type="text" class="form-control" id="lastname" formControlName="lastname" placeholder="">
+                                <div class="invalid-field" *ngIf="!updateProfileForm.controls['lastname'].valid && updateProfileForm.controls['lastname'].touched">
+                                    Please provide a valid lastname.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="phone">Phone</label>
+                                <input type="text" class="form-control" id="phone" formControlName="phone" placeholder="">
+                                <div class="invalid-field" *ngIf="!updateProfileForm.controls['phone'].valid && updateProfileForm.controls['phone'].touched">
+                                    Please provide a valid phone.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="dob">DOB</label>
+                                <input type="text" class="form-control" id="dob" formControlName="dob" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label for="address">Address</label>
+                                <input type="text" class="form-control" id="address" formControlName="address" placeholder="">
+                                <div class="invalid-field" *ngIf="!updateProfileForm.controls['address'].valid && updateProfileForm.controls['address'].touched">
+                                    Please provide a valid address.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Close</button>
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            <button type="submit" [disabled]="!updateProfileForm.valid" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="primaryModal.hide()">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div> -->
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div *ngFor="let alert of alertsDismiss" style="position: absolute; top: 10px; right: 0; width: 30%; z-index: 20000;">
+    <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout"><strong>{{ alert.msg }}</strong></alert>
+</div>
+
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff" type="ball-triangle-path"></ngx-spinner>

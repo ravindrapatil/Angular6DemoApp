@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-sm-12">
+    <h4>Angular Kendo Grid</h4>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-12">
+    <kendo-grid [data]="gridData" [pageSize]="state.take" [skip]="state.skip" [sort]="state.sort" [pageable]="true"
+      [filter]="state.filter" [sortable]="true" [pageable]="true" [filterable]="true" (dataStateChange)="dataStateChange($event)"
+      (remove)="removeHandler($event)" (edit)="editHandler($event)" (cancel)="cancelHandler($event)" (save)="saveHandler($event)"
+      (add)="addHandler($event)" [navigable]="true">
+
+      <ng-template kendoGridToolbarTemplate>
+        <button kendoGridAddCommand>Add new</button>
+      </ng-template>
+
+      <kendo-grid-column field="company" title="Company" width="140" [filterable]="true"></kendo-grid-column>
+      <kendo-grid-column field="drugname" title="Drug name" width="180"></kendo-grid-column>
+      <kendo-grid-column field="genericname" title="Generic name" width="160"></kendo-grid-column>
+      <kendo-grid-column field="code" title="Code" width="120"></kendo-grid-column>
+      <!-- <kendo-grid-column field="description" title="Description" width="220"></kendo-grid-column> -->
+      <kendo-grid-column field="nhsnumber" title="NHS number" width="100"></kendo-grid-column>
+
+      <kendo-grid-command-column title="Actions" width="140">
+        <ng-template kendoGridCellTemplate let-isNew="isNew">
+          <button kendoGridEditCommand [primary]="true">Edit</button>
+          <button kendoGridRemoveCommand>Remove</button>
+          <button kendoGridSaveCommand [disabled]="formGroup?.invalid">{{ isNew ? 'Add' : 'Update' }}</button>
+          <button kendoGridCancelCommand>{{ isNew ? 'Discard' : 'Cancel' }}</button>
+        </ng-template>
+      </kendo-grid-command-column>
+    </kendo-grid>
+    <br/><br/>
+  </div>
+</div>
+
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff" type="ball-triangle-path"></ngx-spinner>

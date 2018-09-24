@@ -1,0 +1,14 @@
+.read-only-text {
+    color: #0783f1; font-weight: 400; border-width: 0;
+}
+
+.invalid-field {
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: #f86c6b;
+}
+
+.btn-primary:disabled {
+    cursor: default;
+}

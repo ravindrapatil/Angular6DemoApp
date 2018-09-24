@@ -1,0 +1,217 @@
+<h4>Pipes / Custom pipes</h4>
+
+<div class="card">
+  <div class="card-header">Custom Pipes</div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-sm-12">
+        <h5 class="text-left">Default image</h5>
+        <p>This custom pipe named 'defaultimage', which is used if the actual image is not present</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6 text-center">
+        <img [src]="imageUrl | defaultimage:'assets/img/default.png'">
+      </div>
+      <div class="col-sm-6 text-center">
+        <img style="border-radius: 120px;" [src]="imageUrl2 | defaultimage:'assets/img/default.png'">
+      </div>
+    </div>
+
+    <br /><br />
+    <div class="row">
+      <div class="col-sm-6">
+        <h5>Capitalize first character</h5>
+        <p>Custom pipe named 'firstcharcateruppercase', which is used to capitalize first character in the string. Here 'rickky' and 'bret' are passed.</p>
+        <ul>
+          <li *ngFor="let obj of dummyObj">
+            {{obj.firstName | firstcharcateruppercase}} {{obj.lastName}}
+          </li>
+        </ul>
+      </div>
+      <div class="col-sm-6">
+        <h5>Truncate characters</h5>
+        <p>Custom pipe that display the first 'n' (50, 100, 150, ...) characters of the description</p>
+        <p><strong>Result:</strong> {{truncateString | truncate: 150}}</p>
+      </div>
+    </div>
+
+    <br /><br />
+    <div class="row">
+      <div class="col-sm-6">
+        <h5>Simple Multiplication</h5>
+        <p>In this custom pipe, it will go through all the items in the array and multiply each item with specified
+          number.
+          multiplyArray = [2, 3, 4, 5, 6]; and multiply with 100
+        </p>
+        <ul>
+          <li *ngFor="let val of multiplyArray">
+            {{val}} * {{multiplyBy}} = {{val | multiply: multiplyBy}}
+          </li>
+        </ul>
+      </div>
+      <div class="col-sm-6">
+        <h5>Filter pipe</h5>
+        <p>Filter multiple properties in the object (companyName, primaryExchange)</p>
+        <input class="form-control" [(ngModel)]="searchText" placeholder="Search here">
+        <br />
+        <ul>
+          <li style="margin-bottom: 20px">
+            <strong>CompanyName</strong> - <strong>Primary Exchange</strong>
+          </li>
+          <li *ngFor="let company of companyList | filter:searchText">
+            {{company.companyName}} - {{company.primaryExchange}}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-header">
+            <i class="fa fa-align-justify"></i> Stock Market Table (using Multiple Filter pipe)
+          </div>
+          <div class="card-body">
+            <table class="table table-responsive-sm table-hover table-outline">
+              <thead class="thead-light">
+                <tr>
+                  <th width="30%">Company Name</th>
+                  <th width="20%">Primary Exchange</th>
+                  <th width="15%">Sector</th>
+                  <th width="15%">Symbol</th>
+                  <th width="10%">MarketCap</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td colspan="5"><input class="form-control" [(ngModel)]="searchText" placeholder="Search here ....."></td>
+                </tr>
+                <tr *ngFor="let company of companyList | filter:searchText">
+                  <td>{{company.companyName}}</td>
+                  <td>{{company.primaryExchange}}</td>
+                  <td>{{company.sector}}</td>
+                  <td>{{company.symbol}}</td>
+                  <td>{{company.marketCap}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">Built-in Pipes</div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-6">
+              <p><strong class="colorBlue">Date</strong></p>
+              <p>
+                Today - {{today | date:"MM/dd/yy"}}
+              </p>
+              <p>
+                Timestamp: 1382086394000 -> {{timestamp}}
+              </p>
+              <p>
+                <button class="btn" (click)="toggleFormat()">Toggle Format</button>
+                &nbsp;&nbsp; =====> The hero's birthday is {{ birthday | date:format }}
+              </p>
+              <p>
+                The chained hero's birthday is: {{birthday | date:format | uppercase}}
+              </p>
+              <p>
+                <strong class="colorBlue">Decimal</strong>
+              </p>
+              <p>
+                Decimal tobe displayed for 3.14159265 using number: '3.1-2': &nbsp;&nbsp; <span class="textColor">{{decimalValue
+                  | number: '3.1-2'}}</span>
+              </p>
+              <p>
+                Decimal tobe displayed for 3.14159265 using number: '1.4-4': &nbsp;&nbsp; <span class="textColor">{{decimalValue
+                  | number: '1.4-4'}}</span>
+              </p>
+      
+              <p>
+                <strong class="colorBlue">Lowercase / Uppercase</strong>
+              </p>
+              <p>
+                lowercase => {{"This transforms a string to lowercase" | lowercase}}
+              </p>
+              <p>
+                uppercase => {{"This transforms a string to uppercase" | uppercase}}
+              </p>
+      
+              <p>
+                <strong class="colorBlue">Slice</strong>
+              </p>
+              <p>
+                This returns a slice of an array. The first argument is the start index of the slice and the second argument
+                is the end index.
+              </p>
+              <p>
+                Sliced for the array [1, 2, 3, 4, 5, 6, 7] using slice:1: 4 : &nbsp;&nbsp; <span class="textColor">{{[1, 2,
+                  3, 4, 5, 6, 7] | slice:1: 4}}</span>
+              </p>
+              <p>
+                Sliced for the array [1, 2, 3, 4, 5, 6, 7] using slice:2 : &nbsp;&nbsp; <span class="textColor">{{[1, 2, 3,
+                  4, 5, 6, 7] | slice: 2}}</span>
+              </p>
+              <p>
+                Sliced for the array [1, 2, 3, 4, 5, 6, 7] using slice:2:-1 : &nbsp;&nbsp; <span class="textColor">{{[1, 2,
+                  3, 4, 5, 6, 7] | slice: 2:-1}}</span>
+              </p>
+      
+            </div>
+            <div class="col-sm-6">
+              <p><strong class="colorBlue">Currency</strong></p>
+              <p>
+                Format numbers in CAD Currency: &nbsp;&nbsp; <span class="textColor">{{price |
+                  currency:'CAD':'symbol-narrow'}}</span>
+              </p>
+              <p>
+                Format numbers in USD Currency: &nbsp;&nbsp; <span class="textColor">{{price | currency:'USD':'code'}}</span>
+              </p>
+              <p>
+                Format numbers in EUR Currency: &nbsp;&nbsp; <span class="textColor">{{price | currency:'EUR':'symbol'}}</span>
+              </p>
+      
+              <p><strong class="colorBlue">Json</strong></p>
+              <p>
+                Useful for debugging and displays an object as a Json string: "[{{dummyObj | json}}]"
+              </p>
+              <p>
+                {{dummyObj | json}}
+              </p>
+      
+              <p>
+                <strong class="colorBlue">Percent</strong>
+              </p>
+              <p>
+                Format numbers (0.123456) in percentage using 'percent' pipe: &nbsp;&nbsp; <span class="textColor">{{0.123456
+                  | percent}}</span>
+              </p>
+              <p>
+                Format numbers (0.123456) in percentage using "percent: '2.1-2'": &nbsp;&nbsp; <span class="textColor">{{0.123456
+                  | percent: '2.1-3'}}</span>
+              </p>
+              <p>
+                Format numbers (42) in percentage using "percent: '10.4-4'": &nbsp;&nbsp; <span class="textColor">{{42 |
+                  percent: '10.4-4'}}</span>
+              </p>
+      
+              <p>
+                <strong class="colorBlue">AsyncPipe</strong>
+              </p>
+              <p>
+                This pipe accepts an observable or a promise and lets us render the output of an observable or promise
+                without having to call then or subscribe.
+              </p>
+      
+            </div>
+          </div>
+        </div>
+      </div>
+
+  </div>
+</div>

@@ -1,0 +1,51 @@
+<div class="animated fadeIn">
+    <div class="cols-12">
+        <h4>Chart JS</h4>
+    </div>
+  <div class="cols-12">
+    <div class="card">
+      <div class="card-header">
+        Line Chart
+      </div>
+      <div class="card-body">
+        <div *ngIf="chart">
+          <canvas id="canvas" height="100"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        Bar Chart (Stock Books One year)
+      </div>
+      <div class="card-body">
+        <div *ngIf="barchartVar">
+          <canvas id="barChartCanvas" height="140"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        Pie Chart (Stock Most Active)
+      </div>
+      <div class="card-body">
+        <div>
+          <canvas id="paichartCanvas" height="100"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+        <div class="card-header">
+          Doughnut Chart (Stock Effective Spread)
+        </div>
+        <div class="card-body">
+          <div>
+            <canvas id="doughnutCanvas" height="100"></canvas>
+          </div>
+        </div>
+      </div>
+
+  </div>
+</div>

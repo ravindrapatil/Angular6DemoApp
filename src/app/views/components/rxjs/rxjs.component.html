@@ -1,0 +1,128 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-sm-12">
+      <h4>RxJs Operations</h4>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <strong>filter() operator</strong>
+        </div>
+        <div class="card-body">
+          <div class="row" style="margin-bottom: 20px">
+            <div class="col-sm-12">
+              <input style="width: 190px; display: inline-block" class="form-control" placeholder="Enter stock value to filter"
+                type="text" #filterValue (keyup)="onKey()">
+              &nbsp;&nbsp;
+              <button class="btn btn-info" (click)="higherThen(filterValue.value)">Stock Higher Then (High label)</button>
+              &nbsp;&nbsp;
+              <button class="btn btn-info" (click)="lowerThen(filterValue.value)">Stock Lower Then (Low label)</button>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-sm-12">
+              <kendo-grid [data]="gridData" [pageSize]="state.take" [skip]="state.skip" [sort]="state.sort" [pageable]="true"
+                [filter]="state.filter" [sortable]="true" [pageable]="true" [filterable]="true" (dataStateChange)="dataStateChange($event)"
+                [navigable]="true">
+                <kendo-grid-column field="label" title="Label" width="140" [filterable]="true"></kendo-grid-column>
+                <kendo-grid-column field="high" title="High" filter="numeric" width="160"></kendo-grid-column>
+                <kendo-grid-column field="low" title="Low" filter="numeric" width="180"></kendo-grid-column>
+                <kendo-grid-column field="open" title="Open" filter="numeric" width="120"></kendo-grid-column>
+                <kendo-grid-column field="close" title="Close" filter="numeric" width="100"></kendo-grid-column>
+                <kendo-grid-column field="volume" title="Volume" filter="numeric" width="100"></kendo-grid-column>
+                <kendo-grid-column field="changePercent" title="Change Percent" filter="numeric" width="100"></kendo-grid-column>
+              </kendo-grid>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <strong>switchMap() operator</strong>
+        </div>
+        <div class="card-body">
+          <div class="row" style="margin-bottom: 20px">
+            <div class="col-sm-4">
+              <ul>
+                <li *ngFor="let player of playerList">
+                  <a href="javascript: void(0)" (click)="cricketPlayerDetails(player)">{{player.name}}</a>
+                </li>
+              </ul>
+            </div>
+            <div class="col-sm-8">
+              <div *ngIf="playerDetail != undefined">
+                <p><strong>{{playerDetail.fullName}}</strong></p>
+                <p><strong>DOB</strong> {{playerDetail.born}}</p>
+                <p><strong>Major Teams</strong> {{playerDetail.majorTeams}}</p>
+                <p><strong>Batting Style</strong> {{playerDetail.battingStyle}}</p>
+                <p><strong>Bowling Style</strong> {{playerDetail.bowlingStyle}}</p>
+                <p><strong>Playing Role</strong> {{playerDetail.playingRole}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <strong>concat() operator</strong>
+        </div>
+        <div class="card-body">
+          <div class="row" style="margin-bottom: 20px">
+            <div class="col-sm-12">
+              <p>Subscribe to Observables in order but only when the previous completes, let me know, then move to the
+                next one.</p>
+              <kendo-grid [data]="gridData2" [pageSize]="state2.take" [skip]="state2.skip" [sort]="state2.sort"
+                [pageable]="true" [sortable]="true" [pageable]="true" (dataStateChange)="dataStateChange2($event)"
+                [navigable]="true">
+                <kendo-grid-column field="label" title="Label" width="140"></kendo-grid-column>
+                <kendo-grid-column field="high" title="High" filter="numeric" width="160"></kendo-grid-column>
+                <kendo-grid-column field="low" title="Low" filter="numeric" width="180"></kendo-grid-column>
+                <kendo-grid-column field="open" title="Open" filter="numeric" width="120"></kendo-grid-column>
+                <kendo-grid-column field="close" title="Close" filter="numeric" width="100"></kendo-grid-column>
+                <kendo-grid-column field="volume" title="Volume" filter="numeric" width="100"></kendo-grid-column>
+                <kendo-grid-column field="changePercent" title="Change Percent" filter="numeric" width="100"></kendo-grid-column>
+              </kendo-grid>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <strong>RxJs Operators</strong>
+        </div>
+        <div class="card-body">
+          <div class="row" style="margin-bottom: 20px">
+            <div class="col-sm-12">
+              <p><strong>concat</strong> - Subscribe to Observables in order but only when the previous completes, let me know, then move to the next one. Use this operator when the order is important, for example when you need to send HTTP requests that should be in order.</p>
+              <p><strong>forkJoin</strong> - forkJoin is the Promise.all() of Rx. Don’t let me know until all the Observables are complete, then give me all the values at once (Array). Use this operator when you need to run the Observables in parallel.</p>
+              <p><strong>mergeMap</strong> - Only when the inner Observable emits, let me know by merging the value to the outer Observable.</p>
+              <p><strong>pairwise</strong> - Let me know when the Observable emits, but also give me the previous value (Array)</p>
+              <p><strong>switchMap</strong> - Like mergeMap but when the source Observable emits cancel any previous subscriptions of the inner Observable.</p>
+              <p><strong>combineLatest</strong> - Let me know when any Observable emits but also give me the latest value from the others (Array). This operator is very useful when you need for example to deal with filters in your app.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

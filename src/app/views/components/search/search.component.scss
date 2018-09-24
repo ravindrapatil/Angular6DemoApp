@@ -1,0 +1,30 @@
+ul.product-list {
+    list-style: none;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+ul.product-list li {
+    padding: 10px 10px;
+    margin: 0 0 10px 0;
+    border: 1px solid #f0f3f5;
+    border-radius: 5px;
+}
+
+ul.product-list li span.label {
+    font-size: 11px;
+    color: #868a8e;
+}
+
+ul.product-list li span.bold {
+    font-weight: bold;
+    color: #3685ca;
+}
+
+ul.product-list li span.fieldValue {
+    font-size: 12px;
+    // color: #f15c01;
+}
+
+

@@ -1,0 +1,81 @@
+<h4>Custom Directives</h4>
+<br />
+<p appCcLogo customHoverTextColor="yellow" colorWhite="#fff" class="card-outline-primary">
+  Custom directive to style the div container
+</p>
+
+<br /><br />
+
+<div class="card">
+  <div class="card-header">
+    <strong>Custom Directive - changes the card icon when card number starts with 3 or 4 or 5. And for other numbers,
+      show default icon</strong>
+  </div>
+  <div class="card-body">
+    <form class="form-horizontal" [formGroup]="paymentForm">
+      <div class="form-group row">
+        <div class="col-md-12">
+          <div class="input-group">
+            <input type="text" formControlName="aNumberField" id="input" name="input" class="form-control" (keyup)="onKey($event)"
+              numberOnly placeholder="Enter valid Visa number">
+            <div class="input-group-append">
+              <span class="input-group-text icon-holder"><img appCcLogo2 [cardNumber]="cardType" /></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<br /><br />
+
+<div class="card">
+  <div class="card-header">
+    <strong>Password and confirm password - custom directive for validation</strong>
+  </div>
+  <div class="card-body">
+    <form class="form-horizontal" #employeeForm="ngForm" (ngSubmit)="onSubmit(employeeForm.value)">
+
+      <div class="form-group" >
+        <label for="name" class="control-label">Name</label>
+        <input id="name" required type="text" class="form-control" name="name" [(ngModel)]="employee.name" #name="ngModel"
+        [class.is-invalid]="name.touched && name.invalid" [class.has-success]="!name.touched && !name.invalid">
+        <span class="help-block" *ngIf="name.touched && name.errors?.required">
+          Name is required
+        </span>
+      </div>
+
+      <div ngModelGroup="passwordGroup" [class.is-invalid]="confirmPassword.touched && confirmPassword.invalid && !confirmPassword.errors?.required">
+        <div class="form-group" >
+          <label for="password" class="control-label">Password</label>
+          <input id="password" required type="password" class="form-control passwordClass" name="password" [(ngModel)]="employee.password"
+            (input)="confirmPassword.control.updateValueAndValidity()"
+            [class.is-invalid]="password.touched && password.invalid && !!confirmPassword.errors?.required"
+            #password="ngModel">
+          <span class="help-block" *ngIf="password.touched && password.errors?.required">
+            Password is required
+          </span>
+        </div>
+
+        <div class="form-group" >
+          <label for="confirmPassword" class="control-label">Confirm Password</label>
+          <input name="confirmPassword" required appConfirmEqualValidator="password" id="confirmPassword" type="password"
+            class="form-control" [(ngModel)]="employee.confirmPassword" #confirmPassword="ngModel"
+            [class.is-invalid]="confirmPassword.touched && confirmPassword.invalid"
+            >
+          <span class="help-block" *ngIf="confirmPassword.touched && confirmPassword.errors?.required">
+            Confirm Password is required
+          </span>
+          <span class="help-block" *ngIf="confirmPassword.touched && confirmPassword.errors?.notEqual &&
+          !confirmPassword.errors?.required">
+            Password and Confirm Password does not match
+          </span>
+        </div>
+      </div>
+      <button type="submit" [disabled]="!employeeForm.valid" class="btn btn-primary">Submit</button>
+    </form>
+    <br/>
+    {{formDataObj | json}}
+  </div>
+</div>

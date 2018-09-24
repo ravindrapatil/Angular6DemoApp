@@ -1,0 +1,65 @@
+<h4>Serverside Pagination</h4>
+<div class="row">
+  <div class="col-sm-12">
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-align-justify"></i> Table
+      </div>
+      <div class="card-body" *ngIf="showNoRecordMsg">
+        <p>No Records</p>
+      </div>
+      <div class="card-body" *ngIf="!showNoRecordMsg">
+        <div class="row">
+          <div class="col-sm-3">
+            <div class="form-group">
+              <select class="form-control" (change)="selectnoOfPages($event.target.value)">
+                <option value="0">--Select no of Items to display--</option>
+                <option *ngFor="let no of noOfItemsToDisplay" value="{{no}}">
+                  {{no}}
+                </option>
+              </select>
+
+              <!-- <input type="text" #searchField (change)="OnSearchTextChanges($event)" > -->
+              <!-- #inputFile (change)="onFileSeleected($event)" -->
+              <!-- <button (click)="search()">Search</button> -->
+
+            </div>
+          </div>
+        </div>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th width="17%">Drug Name</th>
+              <th width="25%">Company</th>
+              <th width="35%">Generic Name</th>
+              <th width="13%">NHS Number</th>
+              <th width="10%">Code</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let prod of productArray">
+              <td>{{prod.drugname}}</td>
+              <td>{{prod.company}}</td>
+              <td>{{prod.genericname}}</td>
+              <td>{{prod.nhsnumber}}</td>
+              <td>{{prod.code}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="col-xs-12 col-12 d-sm-down-none">
+            <pagination [totalItems]="totalItems" [(ngModel)]="currentPage" [itemsPerPage]="itemsPerPage" (pageChanged)="pageChanged($event)"></pagination>
+            <!-- <pagination [totalItems]="totalItems" [(ngModel)]="currentPage" [maxSize]="itemsPerPage" class="pagination-sm"
+                            previousText="&lsaquo;" nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" (pageChanged)="pageChanged($event)"
+                            [boundaryLinks]="true" [rotate]="false" (numPages)="itemsPerPage = $event"></pagination> -->
+      
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngFor="let alert of alertsDismiss" style="position: absolute; top: 10px; right: 0; width: 30%; z-index: 20000;">
+  <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout"><strong>{{ alert.msg }}</strong></alert>
+</div>
+
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff" type="ball-triangle-path"></ngx-spinner>

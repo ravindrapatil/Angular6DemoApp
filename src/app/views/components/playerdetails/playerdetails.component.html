@@ -1,0 +1,169 @@
+<div class="animated fadeIn">
+  <div class="row">
+    <div class="col-sm-12">
+      <h4>Routed Parameter</h4>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <strong>Player Details</strong>
+          <div class="card-header-actions">
+              <a href="javascript:void(0)" (click)="gotoPlayersList()">
+                <small className="text-muted">Players List</small>
+              </a>
+            </div>
+        </div>
+        <div class="card-body">
+          <div class="row" *ngIf="playerInfo" style="margin-bottom: 20px">
+            <div class="col-sm-8 players">
+              <p><span class="label">Name</span> {{playerInfo.name}}</p>
+              <p><span class="label">Born</span> {{playerInfo.born}}</p>
+              <p><span class="label">Current Age</span> {{playerInfo.currentAge}}</p>
+              <p><span class="label">Major Teams</span> {{playerInfo.majorTeams}}</p>
+              <p><span class="label">Playing Role</span> {{playerInfo.playingRole}}</p>
+              <p><span class="label">Batting Style</span> {{playerInfo.battingStyle}}</p>
+              <p><span class="label">Bowling Style</span> {{playerInfo.bowlingStyle}}</p>
+            </div>
+            <div class="col-sm-4">
+              <img src="{{playerInfo.imageURL}}" alt="{{playerInfo.name}}">
+            </div>
+            <div class="col-sm-12">
+              <p><strong>Batting and fielding averages</strong></p>
+              <table class="table table-responsive-sm table-hover table-outline">
+                <thead class="thead-light">
+                  <tr>
+                    <th>&nbsp;</th>
+                    <th>Mat</th>
+                    <th>Inns</th>
+                    <th>No</th>
+                    <th>Runs</th>
+                    <th>HS</th>
+                    <th>Ave</th>
+                    <th>BF</th>
+                    <th>SR</th>
+                    <th>100</th>
+                    <th>50</th>
+                    <th>Ct</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngIf="tests != null">
+                    <td>Tests</td>
+                    <td>{{tests.Mat}}</td>
+                    <td>{{tests.Inns}}</td>
+                    <td>{{tests.NO}}</td>
+                    <td>{{tests.Runs}}</td>
+                    <td>{{tests.HS}}</td>
+                    <td>{{tests.Ave}}</td>
+                    <td>{{tests.BF}}</td>
+                    <td>{{tests.SR}}</td>
+                    <td>{{tests[100]}}</td>
+                    <td>{{tests[50]}}</td>
+                    <td>{{tests.Ct}}</td>
+                  </tr>
+                  <tr *ngIf="odis != null">
+                    <td>ODIs</td>
+                    <td>{{odis.Mat}}</td>
+                    <td>{{odis.Inns}}</td>
+                    <td>{{odis.NO}}</td>
+                    <td>{{odis.Runs}}</td>
+                    <td>{{odis.HS}}</td>
+                    <td>{{odis.Ave}}</td>
+                    <td>{{odis.BF}}</td>
+                    <td>{{odis.SR}}</td>
+                    <td>{{odis[100]}}</td>
+                    <td>{{odis[50]}}</td>
+                    <td>{{odis.Ct}}</td>
+                  </tr>
+                  <tr *ngIf="t20is != null">
+                    <td>T20Is</td>
+                    <td>{{t20is.Mat}}</td>
+                    <td>{{t20is.Inns}}</td>
+                    <td>{{t20is.NO}}</td>
+                    <td>{{t20is.Runs}}</td>
+                    <td>{{t20is.HS}}</td>
+                    <td>{{t20is.Ave}}</td>
+                    <td>{{t20is.BF}}</td>
+                    <td>{{t20is.SR}}</td>
+                    <td>{{t20is[100]}}</td>
+                    <td>{{t20is[50]}}</td>
+                    <td>{{t20is.Ct}}</td>
+                  </tr>
+                </tbody>
+                </table>
+
+                <p><strong>Bowling averages</strong></p>
+                <table class="table table-responsive-sm table-hover table-outline">
+                  <thead class="thead-light">
+                    <tr>
+                      <th>&nbsp;</th>
+                      <th>Mat</th>
+                      <th>Inns</th>
+                      <th>No</th>
+                      <th>Runs</th>
+                      <th>HS</th>
+                      <th>Ave</th>
+                      <th>BF</th>
+                      <th>SR</th>
+                      <th>100</th>
+                      <th>50</th>
+                      <th>Ct</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngIf="testsbowling != null">
+                      <td>Tests</td>
+                      <td>{{testsbowling.Mat}}</td>
+                      <td>{{testsbowling.Inns}}</td>
+                      <td>{{testsbowling.NO}}</td>
+                      <td>{{testsbowling.Runs}}</td>
+                      <td>{{testsbowling.HS}}</td>
+                      <td>{{testsbowling.Ave}}</td>
+                      <td>{{testsbowling.BF}}</td>
+                      <td>{{testsbowling.SR}}</td>
+                      <td>{{testsbowling[100]}}</td>
+                      <td>{{testsbowling[50]}}</td>
+                      <td>{{testsbowling.Ct}}</td>
+                    </tr>
+                    <tr *ngIf="odisbowling != null">
+                      <td>ODIs</td>
+                      <td>{{odisbowling.Mat}}</td>
+                      <td>{{odisbowling.Inns}}</td>
+                      <td>{{odisbowling.NO}}</td>
+                      <td>{{odisbowling.Runs}}</td>
+                      <td>{{odisbowling.HS}}</td>
+                      <td>{{odisbowling.Ave}}</td>
+                      <td>{{odisbowling.BF}}</td>
+                      <td>{{odisbowling.SR}}</td>
+                      <td>{{odisbowling[100]}}</td>
+                      <td>{{odisbowling[50]}}</td>
+                      <td>{{odisbowling.Ct}}</td>
+                    </tr>
+                    <tr *ngIf="t20isbowling != null">
+                      <td>T20Is</td>
+                      <td>{{t20isbowling.Mat}}</td>
+                      <td>{{t20isbowling.Inns}}</td>
+                      <td>{{t20isbowling.NO}}</td>
+                      <td>{{t20isbowling.Runs}}</td>
+                      <td>{{t20isbowling.HS}}</td>
+                      <td>{{t20isbowling.Ave}}</td>
+                      <td>{{t20isbowling.BF}}</td>
+                      <td>{{t20isbowling.SR}}</td>
+                      <td>{{t20isbowling[100]}}</td>
+                      <td>{{t20isbowling[50]}}</td>
+                      <td>{{t20isbowling.Ct}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff" type="ball-triangle-path"></ngx-spinner>

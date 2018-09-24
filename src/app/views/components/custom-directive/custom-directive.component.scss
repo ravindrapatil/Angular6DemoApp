@@ -1,0 +1,39 @@
+.card-outline-primary {
+    border: 1px solid #f33c02 !important;
+}
+
+.icon-holder {
+    width: 48px;
+    height: 35px;
+    padding: 0;
+}
+
+// .employeeForm input.ng-invalid {
+//     background-color:pink;
+// }
+// .employeeForm input.ng-valid {
+//     background-color:lightgreen;
+// }
+
+// .employeeForm .ng-invalid .passwordClass {
+//     background-color:pink;
+// }
+
+// .was-validated .form-control:invalid {
+//     // border-color: none;
+// }
+
+.was-validated .has-error .form-control:valid {
+    border-color: red;
+}
+
+.help-block {
+    display: block;
+    padding-top: 10px;
+    color: red;
+    font-size: 12px;
+}
+
+.is-invalid .passwordClass {
+    border-color: red;
+}

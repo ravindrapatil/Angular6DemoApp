@@ -1,0 +1,145 @@
+<div class="row">
+  <div class="col-sm-12">
+    <h4>Parent Child Communication</h4>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6" [ngClass]="showchart ? 'col-sm-6' : 'col-sm-12'">
+    <p><strong>Parent</strong> - <span style="color:red">click on any row to pass data from parent to child component @Input</span></p>
+    <kendo-grid [data]="gridData" [pageSize]="state.take" [skip]="state.skip" [sort]="state.sort" [pageable]="true"
+      [filter]="state.filter" [sortable]="true" [pageable]="true" [filterable]="true" [selectable]="true"
+      (selectionChange)="onSelect($event)" (dataStateChange)="dataStateChange($event)">
+      <kendo-grid-column field="companyName" title="Company Name" width="140" [filterable]="true"></kendo-grid-column>
+      <kendo-grid-column field="sector" title="Sector" width="130"></kendo-grid-column>
+      <kendo-grid-column field="primaryExchange" title="Primary Exchange" width="160"></kendo-grid-column>
+      <kendo-grid-column field="high" title="High" filter="numeric" width="120"></kendo-grid-column>
+      <kendo-grid-column field="low" title="Low" filter="numeric" width="120"></kendo-grid-column>
+      <kendo-grid-column field="avgTotalVolume" filter="numeric" title="Avg Total Volume" width="120"></kendo-grid-column>
+    </kendo-grid>
+  </div>
+  <div class="col-sm-6" *ngIf="showchart">
+    <p><strong>Child</strong> - click on close to pass the status to parent using @Output and Eventemitter</p>
+    <app-child [selectedData]="selectedData" (hideChart)="hideChartHandler($event)"></app-child>
+  </div>
+</div>
+
+<!-- Parent uses local variable to access the Child in Template -->
+
+<!-- We have created a local variable, #child, on the tag <child-component>. 
+The “child” is called template reference variable, which now represents the child component
+
+The Template Reference variable is created, when you use #<varibaleName> and attach 
+it to a DOM element. You can then, use the variable to reference the DOM element in your Template -->
+
+<div class="row" style="margin-top: 30px">
+  <div class="col-sm-12">
+    <h4>Parent uses local variable to access the Child in Template (Template Reference variable)</h4>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6">
+    <p class="text-center" style="color:darkorchid">Parent Component</p>
+  </div>
+  <div class="col-sm-6">
+    <p class="text-center" style="color:darkorchid">Child Component</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-12" style="margin-bottom: 20px">
+    <button type="button" class="btn btn-primary" (click)="child.userProfile()">Get User Profile</button>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-body">
+        <form class="form-horizontal">
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="hf-email">First Name:</label>
+            <div class="col-md-9">
+              <span class="help-block">{{child.firstname}}</span>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="hf-password">Last Name:</label>
+            <div class="col-md-9">
+              <span class="help-block">{{child.lastname}}</span>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="hf-password">Phone:</label>
+            <div class="col-md-9">
+              <span class="help-block">{{child.phone}}</span>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label" for="hf-password">Address:</label>
+            <div class="col-md-9">
+              <span class="help-block">{{child.address}}</span>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <app-child-second #child></app-child-second>
+  </div>
+</div>
+
+<div class="row" style="margin-top: 30px">
+  <div class="col-sm-12">
+    <h4>Parent uses @ViewChild to access the child component</h4>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6">
+    <p class="text-center" style="color:darkorchid">Parent Component</p>
+  </div>
+  <div class="col-sm-6">
+    <p class="text-center" style="color:darkorchid">Child Component</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-6">
+    <p>
+      <button class="btn btn-primary" (click)="increment()">Increment</button>
+      &nbsp;
+      <button class="btn btn-primary" (click)="decrement()">Decrement</button>
+    </p>
+    <p>
+      Result: {{childThird.count}}
+    </p>
+  </div>
+  <div class="col-sm-6">
+    <app-child-third></app-child-third>
+  </div>
+</div>
+
+<div class="row" style="margin-top: 30px">
+  <div class="col-sm-12">
+    <h4>Share Data Between Sibling Components Using Rxjs BehaviorSubject</h4>
+  </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+      <button type="button" class="btn btn-primary" (click)="getPharmaList()">Get Pharma List</button>
+    </div>
+</div>
+<div class="row">
+  <div class="col-sm-6">
+    <p class="text-center" style="color:darkorchid">Parent Component</p>
+    <p style="font-size: 11px; color: red">Click on the row to pass the data to the sibling component</p>
+  </div>
+  <div class="col-sm-6">
+    <p class="text-center" style="color:darkorchid">Child Component</p>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-8">
+    <app-component-one [pharmaListData]="pharmaList"></app-component-one>
+  </div>
+  <div class="col-sm-4">
+    <app-component-two></app-component-two>
+  </div>
+</div>
