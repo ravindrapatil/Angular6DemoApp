@@ -19,8 +19,6 @@ export class RouteParameterComponent implements OnInit {
   ngOnInit() {
     this.spinner.show();
     this.rxjsService.fantasySquad().subscribe(res => {
-      // debugger;
-      // this.playerList1 = res.squad;
       this.playerList = res.squad[0].players;
       this.spinner.hide();
     }, err => {

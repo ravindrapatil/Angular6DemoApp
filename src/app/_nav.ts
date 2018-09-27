@@ -85,7 +85,13 @@ export const navItems = [
         name: 'Router Parameter',
         url: '/components/routerparameter',
         icon: 'icon-puzzle'
+      },
+      {
+        name: 'NGXS',
+        url: '/components/ngxs',
+        icon: 'icon-puzzle'
       }
+      
     ]
   },     
   // {

@@ -1,0 +1,28 @@
+<div class="row">
+  <div class="col-sm-6">
+    <h2>Shopping Products</h2>
+  </div>
+  <div class="col-sm-6">
+    <div style="position: relative;">
+      <span style="position: absolute; right:15px; top: 0;" class="badge badge-pill badge-danger">{{count}}</span>
+      <i class="icons font-2xl d-block mt-5 cui-cart cart-icon" (click)="gotoCartDetails()"></i> 
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-4" *ngFor="let product of products">
+    <div class="card">
+      <div class="card-body">
+        <p class="text-center"><img [src]="product.image"></p>
+        <div class="row">
+          <div class="col-sm-8"><strong>{{product.name}}</strong></div>
+          <div class="col-sm-4">Price: {{product.price}}</div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 text-center"><br /><a href="javascript:void(0)" (click)="addToCart(product)">Add to
+              Cart</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

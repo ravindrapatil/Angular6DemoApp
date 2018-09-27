@@ -12,6 +12,11 @@ import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
+import { NgxsModule } from '@ngxs/store';
+import { UserState } from './state/user.state';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
+import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
+
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
@@ -64,7 +69,12 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     ReactiveFormsModule,
     AlertModule.forRoot(),
     GridModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    NgxsModule.forRoot([
+      UserState
+    ]),
+    NgxsReduxDevtoolsPluginModule.forRoot(),
+    NgxsLoggerPluginModule.forRoot()
   ],
   declarations: [
     AppComponent,

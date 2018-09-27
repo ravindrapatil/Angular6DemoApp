@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../shared/services/auth/auth.service';
 import { SbService } from '../../shared/services/subjectBehaviour/sb.service';
 import { ProfileService } from '../../views/profile/profile.service';
+import { Store, Select } from '@ngxs/store';
 
 @Component({
   selector: 'app-dashboard',
@@ -25,7 +26,7 @@ export class DefaultLayoutComponent implements OnInit {
   constructor(private router: Router, 
     private auth: AuthService, 
     private profileService: ProfileService,
-    private subjectBhvr: SbService) {
+    private subjectBhvr: SbService, private store: Store) {
 
     this.changes = new MutationObserver((mutations) => {
       this.sidebarMinimized = document.body.classList.contains('sidebar-minimized');
@@ -40,6 +41,9 @@ export class DefaultLayoutComponent implements OnInit {
     this.loggedUser = this.auth.isLoggedIn();
     this.userInfo = JSON.parse(sessionStorage.getItem('user'));
     this.username = this.userInfo.username;
+    this.store.select(state => state.users.loggedUserInfo.userInfo[0].username).subscribe(res => {
+      this.username = res || this.username;
+    });
 
     this.subjectBhvr.myUser.subscribe(res => {
       console.log(res);

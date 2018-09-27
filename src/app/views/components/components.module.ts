@@ -34,6 +34,8 @@ import { RxjsComponent } from './rxjs/rxjs.component';
 import { RouteParameterComponent } from './route-parameter/route-parameter.component';
 import { PlayerdetailsComponent } from './playerdetails/playerdetails.component';
 import { MaincompholderComponent } from './maincompholder.component';
+import { AddusersComponent } from './ngxs/addusers/addusers.component';
+import { UserslistComponent } from './ngxs/userslist/userslist.component';
 
 @NgModule({
   imports: [
@@ -78,7 +80,9 @@ import { MaincompholderComponent } from './maincompholder.component';
     RxjsComponent,
     RouteParameterComponent,
     PlayerdetailsComponent,
-    MaincompholderComponent
+    MaincompholderComponent,
+    AddusersComponent,
+    UserslistComponent
   ]
 })
 export class ComponentsModule { }

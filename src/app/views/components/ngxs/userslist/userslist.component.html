@@ -1,0 +1,57 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-sm-6">
+            Selected Products in Cart
+          </div>
+          <div class="col-sm-6" style="text-align: right;">
+            <a href="javascript:void(0)" (click)="gotoProducts()">Add Products</a>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <table class="table table-responsive-sm table-hover table-outline mb-0">
+          <thead class="thead-light">
+            <tr>
+              <th>Name</th>
+              <th>Image</th>
+              <th>price</th>
+              <th>Quantity</th>
+              <th>Total</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let cart of productsInCart">
+              <td>{{cart.name}}</td>
+              <td><img [src]="cart.image"></td>
+              <td>{{cart.currency}} {{cart.price}}</td>
+              <td><input class="form-control" style="width: 100px" type="number" (keyup)="updateProduct(cart, $event)"
+                  [(ngModel)]="cart.quantity" #quantity="ngModel"></td>
+              <td>{{cart.quantity * cart.price | number: '1.2-4'}}</td>
+              <td><a href="javascript:void(0)" (click)="removeFromCart(cart)">Remove</a></td>
+            </tr>
+            <tr *ngIf="productsInCart.length != 0">
+              <td colspan="4" style="text-align: right">Total: </td>
+              <td>{{subTotal | number: '1.2-4'}}</td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr *ngIf="productsInCart.length != 0">
+                <td colspan="6" class="text-center">
+                    <button class="btn btn-primary" type="button" (click)="placeOrder()">Place an Order</button>
+                </td>
+              </tr>
+            <tr *ngIf="productsInCart.length == 0">
+              <td colspan="6" class="text-center">No items in the cart. <a href="javascript:void(0)" (click)="gotoProducts()">Click
+                  here</a> add the items.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff" type="ball-triangle-path"></ngx-spinner>

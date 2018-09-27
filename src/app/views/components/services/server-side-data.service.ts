@@ -102,6 +102,36 @@ export class ServerSideDataService {
       );
   }
 
+  // Get Shoping cart products
+  getAllShopingProducts() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    };
+
+    return this.http.get(API_URL + '/products', httpOptions)
+      .pipe(
+        map((res: any) => res),
+        catchError((res: any) => this.errorHandler(res))
+      );
+  }
+
+  // Place an Order
+  placeOrder(body) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    };
+
+    return this.http.post(API_URL + '/orders', body, httpOptions)
+      .pipe(
+        map((res: any) => res),
+        catchError((res: any) => this.errorHandler(res))
+      );
+  }
+
   errorHandler(res: any) {
     const statusCode = res.status;
     const error = {

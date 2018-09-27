@@ -14,6 +14,8 @@ import { AjaxComponent } from './ajax/ajax.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
 import { RouteParameterComponent } from './route-parameter/route-parameter.component';
 import { PlayerdetailsComponent } from './playerdetails/playerdetails.component';
+import { AddusersComponent } from './ngxs/addusers/addusers.component';
+import { UserslistComponent } from './ngxs/userslist/userslist.component';
 
 const routes: Routes = [
   {
@@ -116,6 +118,22 @@ const routes: Routes = [
         canActivate: [AuthGuardGuard],
         data: {
           title: 'Player Details'
+        }
+      },
+      {
+        path: 'ngxs',
+        component: AddusersComponent,
+        canActivate: [AuthGuardGuard],
+        data: {
+          title: 'NGXS'
+        }
+      },
+      {
+        path: 'chartdetails',
+        component: UserslistComponent,
+        canActivate: [AuthGuardGuard],
+        data: {
+          title: 'NGXS'
         }
       }
     ]

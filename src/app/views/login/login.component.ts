@@ -5,6 +5,9 @@ import { throwError } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
+import { Store } from '@ngxs/store';
+import { Login } from '../../actions/user.action';
+
 import { AuthService } from '../../shared/services/auth/auth.service';
 import { SbService } from '../../shared/services/subjectBehaviour/sb.service';
 
@@ -17,7 +20,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   alertsDismiss: any = [];
 
-  constructor(private auth: AuthService,
+  constructor(private auth: AuthService, private store: Store,
     private fb: FormBuilder,
     private router: Router,
     private route: ActivatedRoute,
@@ -34,11 +37,14 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    let loginData = this.loginForm.value
-    this.auth.login(loginData).subscribe((res: any) => {
-      if (res.message == 'Auth Successfull') {
-        sessionStorage.setItem('token', res.token);
-        let userInfo = res.userInfo[0];
+    let loginData = this.loginForm.value;
+    console.log(loginData);
+
+    this.store.dispatch(new Login(loginData)).subscribe((res: any) => {
+      debugger;
+      if (res.users.loggedUserInfo.message == 'Auth Successfull') {
+        sessionStorage.setItem('token', res.users.loggedUserInfo.token);
+        let userInfo = res.users.loggedUserInfo.userInfo[0];
         sessionStorage.setItem('user', JSON.stringify(userInfo));
         let getUserId = JSON.parse(sessionStorage.getItem('user'));
         let userId = getUserId._id;
@@ -54,7 +60,28 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/dashboard']);
         }, 900);
       }
-    }, (error) => {
+    },
+    // this.auth.login(loginData).subscribe((res: any) => {
+    //   if (res.message == 'Auth Successfull') {
+    //     sessionStorage.setItem('token', res.token);
+    //     let userInfo = res.userInfo[0];
+    //     sessionStorage.setItem('user', JSON.stringify(userInfo));
+    //     let getUserId = JSON.parse(sessionStorage.getItem('user'));
+    //     let userId = getUserId._id;
+    //     sessionStorage.setItem('userId', userId);
+    //     this.subjectBhvr.passUserInfo(userId);
+    //     this.auth.setLoggedIn(true);
+    //     this.alertsDismiss.push({
+    //       type: 'success',
+    //       msg: `Logged in Successfully :)`,
+    //       timeout: 900
+    //     });
+    //     setTimeout(() => {
+    //       this.router.navigate(['/dashboard']);
+    //     }, 900);
+    //   }
+    // },
+    (error) => {
       console.log(error);
       if (error.statusCode == 404) {
         this.alertsDismiss.push({
