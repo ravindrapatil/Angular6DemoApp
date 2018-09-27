@@ -39,10 +39,10 @@
               <td>&nbsp;</td>
             </tr>
             <tr *ngIf="productsInCart.length != 0">
-                <td colspan="6" class="text-center">
-                    <button class="btn btn-primary" type="button" (click)="placeOrder()">Place an Order</button>
-                </td>
-              </tr>
+              <td colspan="6" class="text-center">
+                <button class="btn btn-primary" type="button" (click)="placeOrder()">Place an Order</button>
+              </td>
+            </tr>
             <tr *ngIf="productsInCart.length == 0">
               <td colspan="6" class="text-center">No items in the cart. <a href="javascript:void(0)" (click)="gotoProducts()">Click
                   here</a> add the items.</td>
@@ -55,3 +55,7 @@
 </div>
 
 <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="medium" color="#fff" type="ball-triangle-path"></ngx-spinner>
+
+<div *ngFor="let alert of alertsDismiss" style="position: absolute; bottom:100px; z-index: 20000; right: 0; width: 45%">
+  <alert [type]="alert.type" [dismissOnTimeout]="alert.timeout"><strong>{{ alert.msg }}</strong></alert>
+</div>

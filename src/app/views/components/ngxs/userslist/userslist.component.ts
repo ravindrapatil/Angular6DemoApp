@@ -22,6 +22,7 @@ export class UserslistComponent implements OnInit {
   quantityField: FormControl = new FormControl();
   totalPriceForItem: number;
   subTotal: any;
+  alertsDismiss: any = [];
 
   constructor(private store: Store, public router: Router, 
     private productsSvc: ServerSideDataService,
@@ -65,14 +66,22 @@ export class UserslistComponent implements OnInit {
   }
 
   placeOrder() {
-    this.spinner.show();
+    // this.spinner.show();
     this.productsInCart.map(item => {
       delete item._id;
       console.log(item);
       this.productsSvc.placeOrder(item).subscribe(res => {
         if(res.status == 200) {
-          this.spinner.hide();
+          //this.spinner.hide();
           this.store.dispatch(new ClearProduct(res));
+          this.alertsDismiss.push({
+            type: 'danger',
+            msg: `Order Placed Successfully. You will be redirected to the products page)`,
+            timeout: 3000
+          });
+          setTimeout(() => {
+            this.router.navigate(['/components/ngxs']);
+          }, 3000);
         }
       }, err => {
         this.spinner.hide();

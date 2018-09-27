@@ -4,6 +4,7 @@ import { AddUser, AddToCart } from '../../../../actions/user.action';
 import { reject } from 'q';
 import { resolve } from 'q';
 import {Router, NavigationExtras} from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { ServerSideDataService } from '../../services/server-side-data.service';
 
 @Component({
@@ -19,20 +20,25 @@ export class AddusersComponent implements OnInit {
   products: any;
   count: any;
 
-  constructor(private store: Store, public router: Router, private productsSvc: ServerSideDataService) { }
+  constructor(private store: Store, 
+    public router: Router, 
+    private productsSvc: ServerSideDataService,
+    private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
+    this.spinner.show();
     this.formLabel = this.store.select(state => state.users.formLabel);
-
     this.store.select(state => state.users.productList).subscribe(res => {
       this.count = res.length;
     });
-
     this.productsSvc.getAllShopingProducts().subscribe(res => {
-      console.log(res);
       if(res.status == 200) {
         this.products = res.products;
+        this.spinner.hide();
       }
+    }, err => {
+      this.spinner.hide();
+      console.log(err);
     })
   }
 
@@ -51,7 +57,7 @@ export class AddusersComponent implements OnInit {
   }
 
   gotoCartDetails() {
-    this.router.navigate(['/components/chartdetails']);
+    this.router.navigate(['/components/cart']);
   }
 
   // addPromise() {

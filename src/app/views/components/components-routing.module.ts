@@ -129,7 +129,7 @@ const routes: Routes = [
         }
       },
       {
-        path: 'chartdetails',
+        path: 'cart',
         component: UserslistComponent,
         canActivate: [AuthGuardGuard],
         data: {
